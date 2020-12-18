@@ -3,6 +3,17 @@ import configs from "./configsCovid.js";
 const cheerio = require("cheerio");
 const unirest = require("unirest");
 const fetch = require("node-fetch");
+const fs = require("fs");
+
+const saveResult = (json, name) => {
+  fs.writeFile(
+    `./data/${name}_result.json`,
+    JSON.stringify(json, null, 2),
+    err => {
+      if (err) console.log("not saved", err.message);
+    }
+  );
+};
 
 const getCovidInfo = async elemClasses => {
   const {
@@ -100,10 +111,12 @@ const getLinks = async elemObj => {
 };
 
 const fetchLinks = async links => {
+  const posts = [];
   for (let i = 0; i < links.length; i++) {
     const post = await getPost(links[i], configs.POST).then(data => data);
-    console.log(post);
+    posts.push(post);
   }
+  return posts;
 };
 
 const check = test => {
@@ -113,6 +126,7 @@ const check = test => {
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 export default {
+  saveResult,
   fetchLinks,
   getLinks,
   getPost,

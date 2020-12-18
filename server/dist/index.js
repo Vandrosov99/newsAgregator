@@ -1,9 +1,5 @@
 "use strict";
 
-var _stringify = require("babel-runtime/core-js/json/stringify");
-
-var _stringify2 = _interopRequireDefault(_stringify);
-
 var _parseFunctions = require("./parseFunctions.js");
 
 var _parseFunctions2 = _interopRequireDefault(_parseFunctions);
@@ -18,11 +14,11 @@ console.log("Index starts...");
 function start() {
   var covInfo = _parseFunctions2.default.getCovidInfo(_configsCovid2.default.COUNTRIES);
   covInfo.then(function (data) {
-    return console.log("DATA" + (0, _stringify2.default)(data));
+    _parseFunctions2.default.saveResult(data, "covidInfo");
   });
   var moneyInfo = _parseFunctions2.default.getMoneyInfo(_configsCovid2.default.MONEY);
   moneyInfo.then(function (data) {
-    console.log(data);
+    _parseFunctions2.default.saveResult(data, "money");
   });
 
   // const postInfo = parseFuncService.getPost(configs.POST.url, configs.POST);
@@ -30,7 +26,9 @@ function start() {
 
   var links = _parseFunctions2.default.getLinks(_configsCovid2.default.URLNEWS);
   links.then(function (data) {
-    _parseFunctions2.default.fetchLinks(data);
+    return _parseFunctions2.default.fetchLinks(data);
+  }).then(function (data) {
+    return _parseFunctions2.default.saveResult(data, "news");
   });
 }
 start();

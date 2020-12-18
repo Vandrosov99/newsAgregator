@@ -16,6 +16,10 @@ var _asyncToGenerator2 = require("babel-runtime/helpers/asyncToGenerator");
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
+var _stringify = require("babel-runtime/core-js/json/stringify");
+
+var _stringify2 = _interopRequireDefault(_stringify);
+
 var _configsCovid = require("./configsCovid.js");
 
 var _configsCovid2 = _interopRequireDefault(_configsCovid);
@@ -25,6 +29,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var cheerio = require("cheerio");
 var unirest = require("unirest");
 var fetch = require("node-fetch");
+var fs = require("fs");
+
+var saveResult = function saveResult(json, name) {
+  fs.writeFile("./data/" + name + "_result.json", (0, _stringify2.default)(json, null, 2), function (err) {
+    if (err) console.log("not saved", err.message);
+  });
+};
 
 var getCovidInfo = function () {
   var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(elemClasses) {
@@ -216,35 +227,39 @@ var getLinks = function () {
 
 var fetchLinks = function () {
   var _ref6 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee6(links) {
-    var i, post;
+    var posts, i, post;
     return _regenerator2.default.wrap(function _callee6$(_context6) {
       while (1) {
         switch (_context6.prev = _context6.next) {
           case 0:
+            posts = [];
             i = 0;
 
-          case 1:
+          case 2:
             if (!(i < links.length)) {
-              _context6.next = 9;
+              _context6.next = 10;
               break;
             }
 
-            _context6.next = 4;
+            _context6.next = 5;
             return getPost(links[i], _configsCovid2.default.POST).then(function (data) {
               return data;
             });
 
-          case 4:
+          case 5:
             post = _context6.sent;
 
-            console.log(post);
+            posts.push(post);
 
-          case 6:
+          case 7:
             i++;
-            _context6.next = 1;
+            _context6.next = 2;
             break;
 
-          case 9:
+          case 10:
+            return _context6.abrupt("return", posts);
+
+          case 11:
           case "end":
             return _context6.stop();
         }
@@ -268,6 +283,7 @@ var sleep = function sleep(ms) {
 };
 
 exports.default = {
+  saveResult: saveResult,
   fetchLinks: fetchLinks,
   getLinks: getLinks,
   getPost: getPost,
