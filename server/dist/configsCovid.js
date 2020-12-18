@@ -13,11 +13,11 @@ var COUNTRIES = {
   }
 };
 
-var Money = {
+var MONEY = {
   url: "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5"
 };
 
-var Post = {
+var POST = {
   url: "https://ua.korrespondent.net/ukraine/politics/4307691-kuleba-dyplomaty-rf-vidmovliauitsia-vid-kontaktiv",
   titleClass: ".post-item__title",
   imgLinkClass: ".post-item__big-photo-img",
@@ -25,8 +25,13 @@ var Post = {
   viewsClass: ".post-item__views span"
 };
 
+var URLNEWS = {
+  url: "https://ua.korrespondent.net/",
+  className: ".article__title a"
+};
 exports.default = {
-  Post: Post,
+  URLNEWS: URLNEWS,
+  POST: POST,
   COUNTRIES: COUNTRIES,
-  Money: Money
+  MONEY: MONEY
 };

@@ -22,8 +22,13 @@ const POST = {
   viewsClass: ".post-item__views span",
 };
 
+const URLNEWS = {
+  url: "https://ua.korrespondent.net/",
+  className: ".article__title a",
+};
 export default {
-  Post,
+  URLNEWS,
+  POST,
   COUNTRIES,
-  Money,
+  MONEY,
 };

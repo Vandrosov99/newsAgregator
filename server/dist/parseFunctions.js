@@ -16,6 +16,10 @@ var _asyncToGenerator2 = require("babel-runtime/helpers/asyncToGenerator");
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
+var _configsCovid = require("./configsCovid.js");
+
+var _configsCovid2 = _interopRequireDefault(_configsCovid);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var cheerio = require("cheerio");
@@ -122,13 +126,13 @@ var getMoneyInfo = function () {
 }();
 
 var getPost = function () {
-  var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(elemClasses) {
-    var url, titleClass, imgLinkClass, textContentClass, viewsClass, response, body, $, title, imgLink, someBadText, updText, textContent, views, result;
+  var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(url, elemClasses) {
+    var titleClass, imgLinkClass, textContentClass, viewsClass, response, body, $, title, imgLink, someBadText, updText, textContent, views, result;
     return _regenerator2.default.wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
-            url = elemClasses.url, titleClass = elemClasses.titleClass, imgLinkClass = elemClasses.imgLinkClass, textContentClass = elemClasses.textContentClass, viewsClass = elemClasses.viewsClass;
+            titleClass = elemClasses.titleClass, imgLinkClass = elemClasses.imgLinkClass, textContentClass = elemClasses.textContentClass, viewsClass = elemClasses.viewsClass;
             _context4.next = 3;
             return unirest.get(url);
 
@@ -164,10 +168,95 @@ var getPost = function () {
     }, _callee4, undefined);
   }));
 
-  return function getPost(_x5) {
+  return function getPost(_x5, _x6) {
     return _ref4.apply(this, arguments);
   };
 }();
+
+var getLinks = function () {
+  var _ref5 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee5(elemObj) {
+    var url, className, response, body, $, links;
+    return _regenerator2.default.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            url = elemObj.url, className = elemObj.className;
+            _context5.next = 3;
+            return unirest.get(url);
+
+          case 3:
+            response = _context5.sent;
+            _context5.next = 6;
+            return response.body;
+
+          case 6:
+            body = _context5.sent;
+            $ = cheerio.load(body);
+            links = [];
+
+
+            $(className).each(function (_, e) {
+              links.push($(e).attr("href"));
+            });
+
+            return _context5.abrupt("return", links);
+
+          case 11:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5, undefined);
+  }));
+
+  return function getLinks(_x7) {
+    return _ref5.apply(this, arguments);
+  };
+}();
+
+var fetchLinks = function () {
+  var _ref6 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee6(links) {
+    var i, post;
+    return _regenerator2.default.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            i = 0;
+
+          case 1:
+            if (!(i < links.length)) {
+              _context6.next = 9;
+              break;
+            }
+
+            _context6.next = 4;
+            return getPost(links[i], _configsCovid2.default.POST).then(function (data) {
+              return data;
+            });
+
+          case 4:
+            post = _context6.sent;
+
+            console.log(post);
+
+          case 6:
+            i++;
+            _context6.next = 1;
+            break;
+
+          case 9:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6, undefined);
+  }));
+
+  return function fetchLinks(_x8) {
+    return _ref6.apply(this, arguments);
+  };
+}();
+
 var check = function check(test) {
   return test;
 };
@@ -179,6 +268,8 @@ var sleep = function sleep(ms) {
 };
 
 exports.default = {
+  fetchLinks: fetchLinks,
+  getLinks: getLinks,
   getPost: getPost,
   getCovidInfo: getCovidInfo,
   getMoneyInfo: getMoneyInfo,

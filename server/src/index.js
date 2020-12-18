@@ -8,7 +8,13 @@ function start() {
   moneyInfo.then(data => {
     console.log(data);
   });
-  const postInfo = parseFuncService.getPost(configs.POST);
-  postInfo.then(data => console.log(data));
+
+  // const postInfo = parseFuncService.getPost(configs.POST.url, configs.POST);
+  // postInfo.then(data => console.log(data));
+
+  const links = parseFuncService.getLinks(configs.URLNEWS);
+  links.then(data => {
+    parseFuncService.fetchLinks(data);
+  });
 }
 start();

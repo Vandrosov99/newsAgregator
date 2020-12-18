@@ -1,3 +1,5 @@
+import configs from "./configsCovid.js";
+
 const cheerio = require("cheerio");
 const unirest = require("unirest");
 const fetch = require("node-fetch");
@@ -45,9 +47,8 @@ const getMoneyInfo = async elemClasses => {
   return result;
 };
 
-const getPost = async elemClasses => {
+const getPost = async (url, elemClasses) => {
   const {
-    url,
     titleClass,
     imgLinkClass,
     textContentClass,
@@ -80,6 +81,31 @@ const getPost = async elemClasses => {
   };
   return result;
 };
+
+const getLinks = async elemObj => {
+  const { url, className } = elemObj;
+
+  const response = await unirest.get(url);
+  const body = await response.body;
+
+  const $ = cheerio.load(body);
+
+  const links = [];
+
+  $(className).each((_, e) => {
+    links.push($(e).attr("href"));
+  });
+
+  return links;
+};
+
+const fetchLinks = async links => {
+  for (let i = 0; i < links.length; i++) {
+    const post = await getPost(links[i], configs.POST).then(data => data);
+    console.log(post);
+  }
+};
+
 const check = test => {
   return test;
 };
@@ -87,6 +113,8 @@ const check = test => {
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 export default {
+  fetchLinks,
+  getLinks,
   getPost,
   getCovidInfo,
   getMoneyInfo,

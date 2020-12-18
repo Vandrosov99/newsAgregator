@@ -20,13 +20,17 @@ function start() {
   covInfo.then(function (data) {
     return console.log("DATA" + (0, _stringify2.default)(data));
   });
-  var moneyInfo = _parseFunctions2.default.getMoneyInfo(_configsCovid2.default.Money);
+  var moneyInfo = _parseFunctions2.default.getMoneyInfo(_configsCovid2.default.MONEY);
   moneyInfo.then(function (data) {
     console.log(data);
   });
-  var postInfo = _parseFunctions2.default.getPost(_configsCovid2.default.Post);
-  postInfo.then(function (data) {
-    return console.log(data);
+
+  // const postInfo = parseFuncService.getPost(configs.POST.url, configs.POST);
+  // postInfo.then(data => console.log(data));
+
+  var links = _parseFunctions2.default.getLinks(_configsCovid2.default.URLNEWS);
+  links.then(function (data) {
+    _parseFunctions2.default.fetchLinks(data);
   });
 }
 start();
