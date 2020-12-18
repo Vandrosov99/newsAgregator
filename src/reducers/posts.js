@@ -5,8 +5,10 @@ const initState = {
 const postReducer = (state = initState, action) => {
   switch (action.type) {
     case "ADD_POST":
-      const updPosts = [...state.posts, ...action.payload];
-      return updPosts;
+      return {
+        ...state,
+        posts: action.payload,
+      };
     default:
       return state;
   }

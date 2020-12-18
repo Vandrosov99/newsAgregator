@@ -5,7 +5,9 @@ import Loader from "react-loader-spinner";
 
 export default function PostList() {
   const state = useSelector(state => state);
-  const posts = state.postsReducer;
+  const posts = state.postsReducer.posts;
+  // console.log("POSTGS : ", posts);
+  // console.log("posts.length : " + posts.length);
   return (
     <div>
       {posts.length ? (
@@ -14,8 +16,9 @@ export default function PostList() {
             <Post
               key={index}
               title={item.title}
-              description={item.description}
-              image={item.image}
+              description={item.textContent}
+              image={item.imgLink}
+              views={item.views}
             />
           );
         })

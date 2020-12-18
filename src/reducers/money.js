@@ -5,8 +5,7 @@ const initState = {
 const moneyReducer = (state = initState, action) => {
   switch (action.type) {
     case "ADD_MONEY":
-      const updMoney = [...state.money, action.payload];
-      return updMoney;
+      return { ...state, money: action.payload };
     default:
       return state;
   }

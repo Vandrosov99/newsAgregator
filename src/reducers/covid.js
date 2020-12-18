@@ -5,8 +5,7 @@ const initState = {
 const covidReducer = (state = initState, action) => {
   switch (action.type) {
     case "ADD_COV":
-      const updCovid = [...state.covidInfo, action.payload];
-      return updCovid;
+      return { ...state, covidInfo: action.payload };
     default:
       return state;
   }
