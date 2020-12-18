@@ -24,7 +24,7 @@ export default function App() {
   };
 
   const fetchCovidInfo = () => {
-    fetch("./data/cov.json")
+    fetch("./data/cov_result.json")
       .then(response => {
         return response.json();
       })

@@ -4,10 +4,9 @@ const cheerio = require("cheerio");
 const unirest = require("unirest");
 const fetch = require("node-fetch");
 const fs = require("fs");
-
 const saveResult = (json, name) => {
   fs.writeFile(
-    `./data/${name}_result.json`,
+    `./../public/data/${name}_result.json`,
     JSON.stringify(json, null, 2),
     err => {
       if (err) console.log("not saved", err.message);

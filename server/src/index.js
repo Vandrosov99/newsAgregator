@@ -4,7 +4,7 @@ console.log("Index starts...");
 function start() {
   const covInfo = parseFuncService.getCovidInfo(configs.COUNTRIES);
   covInfo.then(data => {
-    parseFuncService.saveResult(data, "covidInfo");
+    parseFuncService.saveResult(data, "cov");
   });
   const moneyInfo = parseFuncService.getMoneyInfo(configs.MONEY);
   moneyInfo.then(data => {

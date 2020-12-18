@@ -30,9 +30,8 @@ var cheerio = require("cheerio");
 var unirest = require("unirest");
 var fetch = require("node-fetch");
 var fs = require("fs");
-
 var saveResult = function saveResult(json, name) {
-  fs.writeFile("./data/" + name + "_result.json", (0, _stringify2.default)(json, null, 2), function (err) {
+  fs.writeFile("./../public/data/" + name + "_result.json", (0, _stringify2.default)(json, null, 2), function (err) {
     if (err) console.log("not saved", err.message);
   });
 };
