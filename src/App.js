@@ -6,10 +6,12 @@ import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import actions from "./actions/index";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 export default function App() {
   const state = useSelector(state => state);
   const dispatch = useDispatch();
+
   console.log(state);
 
   useEffect(() => {

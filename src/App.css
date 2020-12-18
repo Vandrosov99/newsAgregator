@@ -26,3 +26,11 @@ body {
     flex: 1;
     padding: 15px 30px;
 }
+
+.loader{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
