@@ -1,23 +1,36 @@
 import React, { Component } from "react";
-import Post from "./components/Post";
-import posts from "./data/posts.json";
+import PostList from "./components/PostList";
+
 import "./App.css";
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        {posts.map(({ title, description, image }, key) => (
-          <Post
-            key={key}
-            title={title}
-            description={description}
-            image={image}
-          />
-        ))}
-      </div>
-    );
-  }
-}
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import actions from "./actions/index";
 
-export default App;
+export default function App() {
+  const state = useSelector(state => state);
+  const dispatch = useDispatch();
+  console.log(state);
+
+  useEffect(() => {
+    console.log("useEff");
+    fetchPost();
+  }, []);
+
+  const fetchPost = () => {
+    fetch("https://5fdbeba591f19e0017334cd1.mockapi.io/posts")
+      .then(data => {
+        return data.json();
+      })
+      .then(data => {
+        dispatch(actions.signPost(data));
+        return true;
+      });
+  };
+
+  return (
+    <div>
+      <PostList />
+    </div>
+  );
+}

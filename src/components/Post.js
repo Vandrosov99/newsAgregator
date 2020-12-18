@@ -4,6 +4,7 @@ const Post = ({ title, description, image }) => {
   return (
     <div className='post'>
       <img
+        alt='test'
         className='post__image'
         src={image}
         // style={{ backgroundImage: `url(${image})` }}
