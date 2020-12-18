@@ -4,10 +4,8 @@ import Emoji from "./Emoji";
 
 export default function MoneyTable() {
   const state = useSelector(state => state);
-  console.log(state);
 
   const money = state.moneyReducer.money;
-  console.log(money);
   return (
     <div className='info__money'>
       <div className='left'>

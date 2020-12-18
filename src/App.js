@@ -14,7 +14,6 @@ export default function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("useEff");
     allFetchs();
   }, []);
 
@@ -39,7 +38,6 @@ export default function App() {
         return data.json();
       })
       .then(data => {
-        console.log(data);
         dispatch(actions.signPost(data));
       });
   };
@@ -49,14 +47,13 @@ export default function App() {
         return data.json();
       })
       .then(data => {
-        console.log(data);
         dispatch(actions.signMoney(data));
       });
   };
   return (
     <div>
       <Header />
-      <PostList />
+      <PostList fetchPost={fetchPost} />
       <Footer />
     </div>
   );
