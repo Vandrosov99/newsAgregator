@@ -7,6 +7,9 @@ export default function Product(props) {
   const posts = stateGlobal.postsReducer.posts;
   const { id } = useParams();
   const data = posts;
+  const dateNow = new Date(new Date().toString().split(" GMT ")[0] + "UTC")
+    .toISOString()
+    .split(".")[0];
   console.log(stateGlobal);
   console.log(data);
   let product;
@@ -21,11 +24,15 @@ export default function Product(props) {
     console.log(product);
     productData = (
       <>
-        <h1>{id}</h1>
-        <h3>{title}</h3>
-        <img src={imgLink} alt='' />
-        <p>{textContent}</p>
-        <p>views {views}</p>
+        <h1 className='product-page_title'>{title}</h1>
+        <img src={imgLink} alt='' className='proudct-page__image' />
+        <div className='product-page__text'>
+          <p className='product-page__desc'>{textContent}</p>
+          <p className='product-page__views'>
+            Просмотрено на данный момент уже {views} людьми
+          </p>
+          <p className='product-page__date'> Сейчас : {dateNow}</p>
+        </div>
       </>
     );
   } else {

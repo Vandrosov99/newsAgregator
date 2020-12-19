@@ -201,3 +201,31 @@ body {
 .pagination > li:last-child > span {
   border-radius: unset;
 }
+
+.product-page {
+  min-height: 100vh;
+  background: url(./img/bg.jpg);
+  padding: 50px;
+}
+.product-page_title {
+  margin: 10px 0;
+  text-align: center;
+}
+.product-page__text {
+  display: inline;
+}
+
+.proudct-page__image {
+  margin: 30px 30px 30px 0;
+  float: left;
+}
+.product-page__desc {
+  line-height: 1.8;
+}
+.product-page__views {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.product-page__date {
+  font-style: italic;
+}
