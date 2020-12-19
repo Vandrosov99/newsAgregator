@@ -169,6 +169,7 @@ body {
   display: flex;
   list-style: none;
   outline: none;
+  justify-content: center;
 }
 .pagination > .active > a {
   background-color: #47ccde;
