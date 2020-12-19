@@ -8,6 +8,8 @@ import actions from "./actions/index";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import Product from "./components/Product";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 export default function App() {
   const state = useSelector(state => state);
@@ -53,7 +55,10 @@ export default function App() {
   return (
     <div>
       <Header />
-      <PostList fetchPost={fetchPost} />
+      <Switch>
+        <Route exact path='/' component={PostList}></Route>
+        <Route path={`/post/:id`} component={Product}></Route>
+      </Switch>
       <Footer />
     </div>
   );

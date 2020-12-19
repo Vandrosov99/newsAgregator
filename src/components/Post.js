@@ -1,6 +1,10 @@
 import React from "react";
 import noImg from "../img/No_image_available.svg";
-const Post = ({ title, description, image, views }) => {
+import { Link, Route, useRouteMatch } from "react-router-dom";
+
+const Post = props => {
+  const { id, title, description, image, views } = props;
+
   return (
     <div className='post'>
       <div className='img-container'>
@@ -12,7 +16,10 @@ const Post = ({ title, description, image, views }) => {
         />
       </div>
       <div className='post__info'>
-        <h2 className='post__title'>{title}</h2>
+        <Link to={`post/${id}`}>
+          <h2 className='post__title'>{title}</h2>
+        </Link>
+
         <p className='post__description'>{description}</p>
       </div>
       <div className='views'>

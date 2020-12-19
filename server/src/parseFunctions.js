@@ -57,7 +57,7 @@ const getMoneyInfo = async elemClasses => {
   return result;
 };
 
-const getPost = async (url, elemClasses) => {
+const getPost = async (id, url, elemClasses) => {
   const {
     titleClass,
     imgLinkClass,
@@ -84,6 +84,7 @@ const getPost = async (url, elemClasses) => {
   const views = $(viewsClass).text().trim();
 
   const result = {
+    id,
     title,
     imgLink,
     textContent,
@@ -112,7 +113,7 @@ const getLinks = async elemObj => {
 const fetchLinks = async links => {
   const posts = [];
   for (let i = 0; i < links.length; i++) {
-    const post = await getPost(links[i], configs.POST).then(data => data);
+    const post = await getPost(i, links[i], configs.POST).then(data => data);
     posts.push(post);
   }
   return posts;

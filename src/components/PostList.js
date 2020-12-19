@@ -64,6 +64,7 @@ export default function PostList() {
         state.tableData.map((item, index) => {
           return (
             <Post
+              id={item.id}
               key={index}
               title={item.title}
               description={item.textContent}

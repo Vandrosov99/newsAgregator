@@ -136,7 +136,7 @@ var getMoneyInfo = function () {
 }();
 
 var getPost = function () {
-  var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(url, elemClasses) {
+  var _ref4 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(id, url, elemClasses) {
     var titleClass, imgLinkClass, textContentClass, viewsClass, response, body, $, title, imgLink, someBadText, updText, textContent, views, result;
     return _regenerator2.default.wrap(function _callee4$(_context4) {
       while (1) {
@@ -163,6 +163,7 @@ var getPost = function () {
             textContent = updText.join("");
             views = $(viewsClass).text().trim();
             result = {
+              id: id,
               title: title,
               imgLink: imgLink,
               textContent: textContent,
@@ -178,7 +179,7 @@ var getPost = function () {
     }, _callee4, undefined);
   }));
 
-  return function getPost(_x5, _x6) {
+  return function getPost(_x5, _x6, _x7) {
     return _ref4.apply(this, arguments);
   };
 }();
@@ -219,7 +220,7 @@ var getLinks = function () {
     }, _callee5, undefined);
   }));
 
-  return function getLinks(_x7) {
+  return function getLinks(_x8) {
     return _ref5.apply(this, arguments);
   };
 }();
@@ -241,7 +242,7 @@ var fetchLinks = function () {
             }
 
             _context6.next = 5;
-            return getPost(links[i], _configsCovid2.default.POST).then(function (data) {
+            return getPost(i, links[i], _configsCovid2.default.POST).then(function (data) {
               return data;
             });
 
@@ -266,7 +267,7 @@ var fetchLinks = function () {
     }, _callee6, undefined);
   }));
 
-  return function fetchLinks(_x8) {
+  return function fetchLinks(_x9) {
     return _ref6.apply(this, arguments);
   };
 }();
